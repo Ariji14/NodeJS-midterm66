@@ -17,6 +17,7 @@ app.get('/hello/:name', function (req,res) {
     res.send('sey hello with ' + req.params.name) 
    })
 
+
 let port = 8080
 app.listen(port, function(){
     console.log('server running on ' + port)
