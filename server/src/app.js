@@ -1,12 +1,23 @@
-const express = require('express');
+let express = require('express')
+let bodyParser = require('body-parser')
 const que1 = require('./que1');
 
-const app = express();
-const port = 3000; // หรือ port ที่คุณต้องการใช้งาน
+const app = express()
 
-app.use(express.json());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
 
-// สร้าง route สำหรับ API "que1"
+require('./route')(app)
+
+app.get('/status', function (req,res){
+    res.send('Hello nodejs server')
+})
+
+app.get('/hello/:name', function (req,res) {
+    console.log('hello - ' + req.params.name)
+    res.send('sey hello with ' + req.params.name) 
+   })
+
 app.post('/que1', (req, res) => {
   const { x } = req.body; // รับค่า x จาก request body
   if (x === undefined) {
@@ -17,6 +28,7 @@ app.post('/que1', (req, res) => {
   return res.json({ result });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+let port = 8082
+app.listen(port, function(){
+    console.log('server running on ' + port)
+})
