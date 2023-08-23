@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 require('./route')(app)
 
 app.get('/status', function (req,res){
-    res.send('Hello nodejs server belong to nattawut')
+    res.send('Hello nodejs server')
 })
 
 app.get('/hello/:name', function (req,res) {
